@@ -1,0 +1,44 @@
+package twoHeap;
+
+import java.util.PriorityQueue;
+
+
+//The time complexity of the insertNum() will be O(logN)O(logN) due to the insertion in the heap.
+// The time complexity of the findMedian() will be O(1)O(1) as we can find the median from the top elements of the heaps.
+
+public class medianOfStream {
+    class MedianOfAStream {
+
+        PriorityQueue<Integer> maxHeap; //containing first half of numbers
+        PriorityQueue<Integer> minHeap; //containing second half of numbers
+
+        public MedianOfAStream() {
+            maxHeap = new PriorityQueue<>((a, b) -> b - a);
+            minHeap = new PriorityQueue<>((a, b) -> a - b);
+        }
+
+        public void insertNum(int num) {
+            if (maxHeap.isEmpty() || maxHeap.peek() >= num)
+                maxHeap.add(num);
+            else
+                minHeap.add(num);
+
+            // either both the heaps will have equal number of elements or max-heap will have one
+            // more element than the min-heap
+            if (maxHeap.size() > minHeap.size() + 1)
+                minHeap.add(maxHeap.poll());
+            else if (maxHeap.size() < minHeap.size())
+                maxHeap.add(minHeap.poll());
+        }
+
+        public double findMedian() {
+            if (maxHeap.size() == minHeap.size()) {
+                // we have even number of elements, take the average of middle two elements
+                return maxHeap.peek() / 2.0 + minHeap.peek() / 2.0;
+            }
+            // because max-heap will have one more element than the min-heap
+            return maxHeap.peek();
+        }
+
+    }
+}
