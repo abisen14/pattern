@@ -1,3 +1,5 @@
+https://github.com/rjnitt/jira-fk/blob/master/src/main/java/com/rjnitt/boilerplate/controller/SprintController.java
+
 --------------------
 Task's :  
 
@@ -29,6 +31,60 @@ public class TaskDto {
 	private Long id;
 	private String name;
   private Long createdBy
-  --------------------
+--------------------
   
-  
+@RestController
+@RequestMapping("/task")
+public class TaskController {
+
+	@Autowired
+	private TaskService taskService;
+
+	@PostMapping(value = "/create")
+	public Task create(@RequestBody TaskDto taskdto) {
+		return taskService.createTask(taskdto);
+	}
+
+	@PostMapping(value = "/update")
+	public Task update(@RequestBody TaskDto taskdto) {
+		return taskService.updateTask(taskdto);
+	}
+
+	@PostMapping(value = "/disable")
+	public Boolean disable(@RequestBody TaskDto taskdto) {
+		return taskService.disableTask(taskdto);
+	}
+
+	@GetMapping(value = "/get-detail")
+	public TaskDetailDto getTaskDetail(@RequestParam Long taskId) {
+		return taskService.getTaskDetail(taskId);
+	}
+
+
+	@GetMapping(value = "/assign")
+	public List<Task> getAssignTask(@RequestParam Long userId) {
+		return taskService.getAssignTask(userId);
+	}
+
+}
+
+----------------------------
+@RestController
+@RequestMapping("/todolist")
+public class SprintController {
+
+	@Autowired
+	private SprintService sprintService;
+	
+
+	@PostMapping(value = "/create")
+	public Sprint create(@RequestBody SprintDto sprint) {
+		return sprintService.createSprint(sprint);
+	}
+
+	@GetMapping(value = "/get")
+	public Sprint get(@RequestParam Long sprintId) {
+		return sprintService.get(sprintId);
+	}
+
+----------------------------
