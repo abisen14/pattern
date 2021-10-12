@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class insertIntervals {
-    import java.util.*;
 
     static class Interval {
         int start;

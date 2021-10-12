@@ -1,0 +1,8 @@
+package fbTop;
+
+//Input: s = "lee(t(c)o)de)"
+//Output: "lee(t(c)o)de"
+//Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
+
+public class minimumParenthesesRemove {
+}
